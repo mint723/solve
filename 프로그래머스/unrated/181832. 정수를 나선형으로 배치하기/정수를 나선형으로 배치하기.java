@@ -7,16 +7,11 @@ class Solution {
      public static int[][] sol(int[][] answer, int n, int cycle,int lastNum){
         for (int i = 0; i < n-1; i++) {
             answer[answer.length-n-cycle][answer.length-n+i-cycle] = lastNum+i+1;
-        }
-        for (int i=0; i<n-1; i++){
+
             answer[answer.length-n+i-cycle][answer.length-1-cycle]= lastNum+i+n;
-        }
 
-        for (int i = 0; i < n-1; i++) {
             answer[answer.length-1-cycle][n-1-i+cycle] =lastNum+ (n-1)+n+i;
-        }
 
-        for (int i = 0; i < n-1; i++) {
             answer[answer.length-1-i-cycle][answer.length-n-cycle] = lastNum+(n-1)+(n-1)+n+i;
             if(i==n-2){
                 lastNum+=(n-1)+(n-1)+n+i;
