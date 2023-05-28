@@ -9,9 +9,6 @@ class Solution {
         }
         Arrays.sort(iArr);
 
-        for (int i = 0; i < iArr.length; i++) {
-            System.out.println(iArr[i]);
-        }
         String answer = iArr[0]+" "+iArr[iArr.length-1];
         return answer;
     }
