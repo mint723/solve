@@ -12,7 +12,7 @@ class Solution
             a.add(A[i]);
             b.add(B[i]);
         }
-
+        
         while(!a.isEmpty()){
             answer+=a.poll()*b.poll();
         }
