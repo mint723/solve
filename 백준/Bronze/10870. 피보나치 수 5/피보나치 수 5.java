@@ -16,5 +16,6 @@ class Main{
             list.add(list.get(i-1) + list.get(i-2));
         }
         System.out.println(list.get(num));
+        
     }
 }
