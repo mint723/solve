@@ -1,14 +1,14 @@
 class Solution {
     public int solution(int n) {
-        int answer = 0;
+        int answer=0;
         for(int i=4; i<=n; i++){
-            int count = 0;
-            for(int j=1; j<=n; j++){
-                if(i%j==0) count++;
-            }
-            if(count>=3) answer++;
+            if(isAnswer(i)) answer++;
         }
-        
         return answer;
+    }
+    
+    boolean isAnswer(int m){
+        if((m%3==0 && m>3) || (m%2==0 && m>2)) return true;
+        return false;
     }
 }
