@@ -1,13 +1,15 @@
 class Solution {
     int answer = Integer.MAX_VALUE;
+    boolean[] visited;
     String tarStr;
     
     public int solution(String begin, String target, String[] words) {
         tarStr = target;
+        visited = new boolean[words.length];
         
         for(int i=0; i<words.length; i++){
             if(isDiff(begin, words[i])){
-                dfs(i, new boolean[words.length], words, 1);
+                dfs(i, words, 1);
             }
         }
         
@@ -18,8 +20,7 @@ class Solution {
         return answer;
     }
     
-    void dfs(int idx, boolean[] visited, String[] words, int count){
-        visited[idx] = true;
+    void dfs(int idx, String[] words, int count){
         if(words[idx].equals(tarStr)){
             answer = Math.min(answer, count);
         }
@@ -27,7 +28,9 @@ class Solution {
         for(int i=0; i<words.length; i++){
             // 방문하지 않은 곳인지 확인
             if(i != idx && isDiff(words[idx], words[i]) && !visited[i]){
-                dfs(i, visited, words, count+1);
+                visited[idx] = true;
+                dfs(i, words, count+1);
+                visited[idx] = false;
             }
         }
     }
