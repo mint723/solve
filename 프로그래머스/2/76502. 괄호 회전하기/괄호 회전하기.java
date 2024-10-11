@@ -1,24 +1,17 @@
 import java.util.*;
-import java.util.stream.*;
 
 class Solution {
     public int solution(String s) {
         int answer = 0;
-        Queue<Character> q = new LinkedList<>();
-        for(char c : s.toCharArray()){
-            q.offer(c);
-        }
-        
         for(int i=0; i<s.length(); i++){
-            q.offer(q.poll());
-            String str = q.stream().map(String::valueOf).collect(Collectors.joining(""));
-            if(isAnswer(str))
+            String str = s.substring(i) + s.substring(0,i);
+            if(isValid(str))
                 answer++;
         }
         return answer;
     }
     
-    boolean isAnswer(String s){
+    boolean isValid(String s){
         Stack<Character> stack = new Stack<>();
         for(char c : s.toCharArray()){
             if(c == '['){
@@ -34,6 +27,6 @@ class Solution {
                     return false;
             }
         }
-        return stack.size() == 0;
+        return stack.size()==0;
     }
 }
