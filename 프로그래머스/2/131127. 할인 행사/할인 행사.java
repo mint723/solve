@@ -6,11 +6,7 @@ class Solution {
         Map<String, Integer> map = new HashMap<>();
         for(int i=0; i<discount.length - 9; i++){
             for(int j=i; j<i+10; j++){
-                if(!map.containsKey(discount[j])){
-                    map.put(discount[j], 1);
-                }else{
-                    map.put(discount[j], map.get(discount[j])+1);
-                }
+                map.put(discount[j], map.getOrDefault(discount[j], 0) + 1);
             }
             
             int check = 0;
