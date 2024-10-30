@@ -6,19 +6,17 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         int count = 0;
         for(int i=0; i<number.length(); i++){
-            int num = number.charAt(i)-'0';
-            while(!stack.isEmpty() && stack.peek() < num && count<k){
+            int num = number.charAt(i) - '0';
+            
+            while(!stack.isEmpty() && stack.peek() < num && count != k){
                 stack.pop();
                 count++;
             }
+            
             stack.push(num);
         }
-        
-        if(k != count){
-            while(k!=count){
-                stack.pop();
-                count++;
-            }
+        while(stack.size() != number.length() - k){
+            stack.pop();
         }
         
         return stack.stream().map(String::valueOf).collect(Collectors.joining(""));
