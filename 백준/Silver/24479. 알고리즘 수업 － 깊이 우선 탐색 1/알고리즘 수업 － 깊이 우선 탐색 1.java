@@ -3,10 +3,10 @@ import java.io.*;
 
 class Main{
     static int N,M;
-    static List<Integer>[] map;
+    static List<Integer>[] map; // 노드간 연결 정보
     static boolean[] visited;
     static int[] answer;
-    static int depth = 1;
+    static int order = 1; // 방문 순서를 기록하는 변수
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +15,7 @@ class Main{
         M = Integer.parseInt(st.nextToken());
         int startPoint = Integer.parseInt(st.nextToken());
 
-        map = new ArrayList[N+1]; // 인접 리스트 생성
+        map = new List[N+1]; // 인접 리스트 생성
         visited = new boolean[N+1]; // 방문 기록
 
         answer = new int[N+1]; // 정답
@@ -33,12 +33,12 @@ class Main{
         }
 
         for (int i = 1; i <= N; i++) {
-            // 정점 번호가 작은것부터 방문하기 위해 정렬
+            // 정점 번호가 작은것부터 방문하기 위해 정렬 
             Collections.sort(map[i]);
         }
 
         visited[startPoint] = true;
-        answer[startPoint] = depth++;
+        answer[startPoint] = order++;
         dfs(startPoint);
 
         StringBuilder sb = new StringBuilder();
@@ -54,7 +54,7 @@ class Main{
     static void dfs(int point){
         for (int next : map[point]) {
             if(!visited[next]){
-                answer[next] = depth++;
+                answer[next] = order++;
                 visited[next] = true;
                 dfs(next);
             }
