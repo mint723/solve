@@ -4,7 +4,7 @@ class Solution {
         return answer;
     }
     
-    static int[] calc(int brown, int yellow, int line){
+    int[] calc(int brown, int yellow, int line){
         if(yellow%line!=0){
             return calc(brown, yellow, line+1);
         }
