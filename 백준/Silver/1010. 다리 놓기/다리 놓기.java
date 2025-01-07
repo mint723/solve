@@ -1,29 +1,33 @@
+import java.io.*;
 import java.util.*;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.math.BigInteger;
 
 class Main{
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int num = Integer.parseInt(br.readLine());
-        for(int i=0; i<num; i++){
-            String nums = br.readLine();
-            String[] numArr = nums.split(" ");
-            int firstNum = Integer.parseInt(numArr[0]);
-            int secondNum = Integer.parseInt(numArr[1]);
-            BigInteger sF = new BigInteger("1");
-            BigInteger mF = new BigInteger("1");
-            for(int j=secondNum; j>(secondNum-firstNum); j--){
-                sF=sF.multiply(new BigInteger(String.valueOf(j)));
-            }
-            for(int k=firstNum; k>0; k--){
-                mF=mF.multiply(new BigInteger(String.valueOf(k)));
-            }
-            System.out.println(sF.divide(mF));
+        int[][] dp = new int[30][30];
+        for(int i=0; i<30; i++){
+            dp[i][i] = 1;
+            dp[i][0] = 1;
         }
-        
+
+        for(int i=2; i<30; i++){
+            for(int j=1; j<30; j++){
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
+            }
+        }
+
+        int T = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        for(int t=0; t<T; t++){
+            st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
+
+            sb.append(dp[M][N]).append('\n');
+        }
+        System.out.println(sb);
+
         br.close();
     }
 }
