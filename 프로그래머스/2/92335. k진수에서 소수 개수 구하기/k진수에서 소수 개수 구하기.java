@@ -7,7 +7,7 @@ class Solution {
         String[] arr = num.split("0");
         
         for(String s : arr){
-            if(s.isBlank() || s.isEmpty())
+            if(s.isEmpty())
                 continue;
             
             if(isPrime(Long.parseLong(s)))
