@@ -1,18 +1,9 @@
--- 코드를 작성해주세요
-
--- 년도별 가장 큰 대장균
-# SELECT DIFFERENTIATION_DATE, MAX(size_of_colony)
-# FROM ecoli_data
-# GROUP BY DIFFERENTIATION_DATE;
-
-SELECT year(ecoli_data.DIFFERENTIATION_DATE) YEAR,
-        max_colony - size_of_colony  YEAR_DEV,
-        ecoli_data.id ID
-FROM ecoli_data join
-(
-    SELECT year(DIFFERENTIATION_DATE) AS MAX_YEAR, MAX(size_of_colony) AS max_colony
+-- 분화된 연도별 가장 큰 대장균의 크기
+SELECT CAST(YEAR AS UNSIGNED) YEAR, max - size_of_colony AS YEAR_DEV, ID
+FROM ecoli_data, (
+    SELECT substring(DIFFERENTIATION_DATE, 1, 4) as year, MAX(size_of_colony) as max
     FROM ecoli_data
-    GROUP BY MAX_YEAR
-) AS max_size
-on max_year = year(ecoli_data.DIFFERENTIATION_DATE)
-ORDER BY year, year_dev;
+    GROUP BY substring(DIFFERENTIATION_DATE, 1, 4)) AS data
+WHERE substring(DIFFERENTIATION_DATE, 1, 4) = data.year
+ORDER BY year, year_dev
+;
